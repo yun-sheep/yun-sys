@@ -26,6 +26,7 @@ public class ResourceServiceImpl {
     private ISysMenuService menuService;
     @Resource
     private ISysRoleService roleService;
+    //使用PostConstruct注解，程序在启动的时候就加载某些数据
     @PostConstruct
     public void init() {
         // 定义缓存map
