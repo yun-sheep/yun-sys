@@ -19,10 +19,10 @@ public interface AuthConstant {
     /**
      * app端客户端类型定义
      */
-    String CLIENT_APP = "psi-app";
+    String CLIENT_APP = "sys-app";
 
     /**
-     * 管理端客户端类型定义
+     * 管理端客户端类型定义(这个是干什么的）
      */
     String CLIENT_MANAGER = "psi-manager";
 

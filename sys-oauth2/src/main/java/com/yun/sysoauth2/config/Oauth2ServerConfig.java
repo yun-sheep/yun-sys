@@ -66,10 +66,10 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      *针对于第三方客户端配置（用来指定给哪一些进行授权，然后是怎么授权的）
      *指定哪些应用可以访问授权服务并颁发令牌
      * 访问模式是什么
-     * */
-    /*传来的参数clients是我们的应用，要去找授权服务器授权，授权完了之后会给我们授权码，我们
-     * （client）拿着授权码再到授权服务器去获取令牌，获取到令牌之后拿着令牌去资源服务器获取资源*/
+     * 应用（login服务器）拿着第三方认证所需要的信息去认证服务器拿到token
+    */
     public void config(ClientDetailsServiceConfigurer clients) throws Exception{
+        //直接写在内存中（这个内存中是怎么回事）
         clients.inMemory()
                 //配置客户端ID（管理端）
                 .withClient(AuthConstant.CLIENT_MANAGER)
@@ -92,7 +92,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .accessTokenValiditySeconds(3600 * 24)
                 .refreshTokenValiditySeconds(3600 * 24 * 7);
     }
-    //这个是用来干什么的
+    //配置授权服务非安全性功能部分（JWT的增强啊，授权服务器之类的）
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         //定义JWT内置增强内容
@@ -113,7 +113,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 //设置凭证增强附加额外信息到凭证中
                 .tokenEnhancer(enhancerChain);
     }
-
+    //检查token的策略
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
         // 访问安全性配置

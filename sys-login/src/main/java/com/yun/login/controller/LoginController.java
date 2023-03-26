@@ -39,7 +39,7 @@ public class LoginController implements LoginApis {
     private UserHolder userHolder;
     /**
      * 实现授权登录
-     *
+     * 使用的是密码模式
      * */
     @PostMapping("auth-login")
     @Override

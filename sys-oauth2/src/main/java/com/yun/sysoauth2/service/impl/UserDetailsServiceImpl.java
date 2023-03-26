@@ -24,6 +24,7 @@ import java.util.List;
  * @auther j2-yizhiyang
  * @date 2023/3/20 20:24
  */
+//去追login->Oauth远程调用的模块
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Resource
@@ -34,7 +35,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     SysUserServiceImpl userService;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //clientId = 登录客户端ID：project-app或project-manager
         String clientId = request.getParameter(TokenParams.CLIENT_ID);
+        //为什么要通过客户端ID来
         if (AuthConstant.CLIENT_MANAGER.equals(clientId)) {
             //1 通过用户名查找用户对象
             SysUser user = new SysUser();
@@ -56,7 +59,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             List<GrantedAuthority> authorities = new ArrayList<>();
             //这个是直接写死的吗这个权限？
             roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getRoleCode())));
-            //4 构建权限角色对象 TODO: 扩展存储对象在这里通过数据库查询获取并注入到SecurityUser对象中
+            //4 构建权限角色对象（这个应该直接存储了啊，不然在哪里进行存储啊，妈的，无语） TODO: 扩展存储对象在这里通过数据库查询获取并注入到SecurityUser对象中
             return new SecurityUser(user, orgCode, authorities);
 
         } else if (AuthConstant.CLIENT_APP.equals(clientId)) {
