@@ -19,4 +19,6 @@ public interface AuthApis {
      * @return 响应结果
      */
     JsonVO<Oauth2TokenDTO> postAccessToken(Principal principal, Map<String, String> parameters);
+
+
 }

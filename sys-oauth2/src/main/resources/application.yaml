@@ -1,0 +1,23 @@
+server:
+  port: 9401
+spring:
+  application:
+    name: micro-oauth2-auth
+  datasource:
+    url: jdbc:mysql://localhost:3306/myb?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&allowPublicKeyRetrieval=true
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+  redis:
+    host: 192.168.56.129
+    port: 6379
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.56.128:8848
+        namespace: 12
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
